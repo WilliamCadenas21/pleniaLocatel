@@ -9,8 +9,12 @@ var bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config();
 
+//Configura la db
+require('./database')
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var franquiciado = require('./routes/franquiciado');
 
 var app = express();
 
@@ -27,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/franquiciado', franquiciado);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
