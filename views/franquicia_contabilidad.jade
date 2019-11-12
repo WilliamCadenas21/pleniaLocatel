@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Contabilidad
+    h3 Ingresos:
+    p $#{income}
+    h3 Egresos:
+    p $#{expenses}
+    h3 Trámites en tránsito:
+    each transaction in on_transit
+        p $#{transaction}
+
+    
+    a(href='/franquicia/home') Inicio

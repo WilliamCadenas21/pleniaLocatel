@@ -4,8 +4,10 @@ html
     title= 'Franquicias'
   body
     h1 Auditoría
-    - rules = ['']
+    - rules = ['Primero el cliente', 'Nunca diga no', 'Los proveedores también son nuestros clientes', 'Nuestros empleados comparten nuestros valores', 'Sin fallas de inventario', 'Tienda organizada', 'Venta cruzada de productos y servicios', 'Línea exclusiva de productos', 'Seguimiento de órdenes especiales', 'El mejor servicio en cada área']
     - for (var i = 0; i < employees.length; i++) 
-        p #{i}
-        -  for (var mand = 0; mand < 10; mand++)
-        
+        h3 Empleado #{i}
+        -  for (var mand = 0; mand < rules.length; mand++)
+            li #{rules[mand]}: #{employees[i][mand]}
+    
+    a(href='/franquicia/home') Inicio
