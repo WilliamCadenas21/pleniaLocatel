@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Home
+    - links = [['Inventarios', 'inventarios'], ['Pagos', 'pagos'], ['Auditoría', 'auditoria'], ['Órdenes', 'ordenes'], ['Reportes', 'reportes'], ['Contabilidad', 'contabilidad']]
+    each l in links
+        li
+            a(href='/franquicia/'+l[1]) #{l[0]}
