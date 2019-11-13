@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Órdenes
+    form(method='POST' action='/franquicia/ordenes')
+        div.form-group
+            label(for='to') Seleccionar:
+            select(name='to')
+                option(value='master') Master
+                option(value='distribuidor') Distribuidor
+    
+        h3 Productos
+        - for (var i = 0; i < products.length; i++)
+            div.form-group
+                input(type="checkbox", name="check_prod#{i}") 
+                | #{products[i].name}
+                input(type="number", name="quant#{i}", min=1, max=1000) 
+
+        button.btn.btn-primary(type='submit') Ordenar
+
+    a(href='/franquicia/home') Inicio
