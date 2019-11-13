@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var master = require('../controllers/masterController')
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -156,15 +157,19 @@ router.get('/master/inventarios', function(req, res){
   ]})
 });
 
-router.get('/master/ordenes', function(req, res){
+router.get('/master/ordenes', async function(req, res){
+  let products = await master.getCatalog();
   res.render('master/ordenes', 
-  { products: 
-      [{name: 'Equipo 1'}, {name: 'Equipo 2'}, {name: 'Equipo 3'}],
+  { products: products,
     orders: [
       {id: 23123, store: 'ABC', products: [{name: 'Equipo 1', quantity: 5}]},
       {id: 21232, store: 'DEF', products: [{name: 'Equipo 3', quantity: 7}, {name: 'Equipo 4', quantity: 8}]},
-    ]
-  });
+    ]});
+});
+
+router.post('/master/ordenes', async function(req, res){
+  await master.updateCatalog(req.body);
+  res.redirect('/master/ordenes');
 });
 
 router.get('/master/reportes', function(req, res){
