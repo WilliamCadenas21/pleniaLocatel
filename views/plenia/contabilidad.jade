@@ -4,14 +4,14 @@ html
     title= 'Plenia Locatel'
   body
     h1 Contabilidad
-    each master in masters
-        h2 #{master.name}
+    each store in stores
+        h2 #{store.name}
         h3 Ingresos:
-        p $#{master.income}
+        p $#{store.income}
         h3 Egresos:
-        p $#{master.expenses}
+        p $#{store.expenses}
         h3 Trámites en tránsito:
-        each transaction in master.on_transit
+        each transaction in store.on_transit
             p $#{transaction}
 
 

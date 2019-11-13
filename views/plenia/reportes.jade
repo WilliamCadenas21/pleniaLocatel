@@ -4,11 +4,11 @@ html
     title= 'Plenia'
   body
     h1 Reportes
-    each master in masters
-        h4 #{master.name}
-        p Inventario: #{master.stock}
-        p Ventas: #{master.sales}
-        p Unidades vendidas: #{master.sold_units}
+    each store in stores
+        h4 #{store.name}
+        p Inventario: #{store.stock}
+        p Ventas: #{store.sales}
+        p Unidades vendidas: #{store.sold_units}
         br
 
     a(href='/plenia/home') Inicio

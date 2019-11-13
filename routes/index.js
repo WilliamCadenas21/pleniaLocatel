@@ -207,9 +207,9 @@ router.get('/plenia/pagos', function(req, res){
 
 router.get('/plenia/reportes', function(req, res){
   res.render('plenia/reportes', 
-    {masters: [
-      {name: 'Master 1', stock: 213, sales: 123, sold_units: 231},
-      {name: 'Master 2', stock: 450, sales: 347, sold_units: 670}]});
+    {stores: [
+      {name: 'ABC', stock: 213, sales: 123, sold_units: 231},
+      {name: 'DEF', stock: 450, sales: 347, sold_units: 670}]});
 });
 
 router.get('/plenia/auditoria', function(req, res){
@@ -221,9 +221,9 @@ router.get('/plenia/auditoria', function(req, res){
 });
 
 router.get('/plenia/contabilidad', function(req, res){
-  res.render('plenia/contabilidad',     {masters: [
-    {name: 'Master 1', income: 4500000, expenses: 3500000, on_transit: [300000, 450000, 200000]},
-    {name: 'Master 2', income: 3420000, expenses: 1234000, on_transit: [23000]}
+  res.render('plenia/contabilidad',     {stores: [
+    {name: 'ABC', income: 4500000, expenses: 3500000, on_transit: [300000, 450000, 200000]},
+    {name: 'DEF', income: 3420000, expenses: 1234000, on_transit: [23000]}
   ]});
 });
 
