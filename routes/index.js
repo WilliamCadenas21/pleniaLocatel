@@ -169,7 +169,15 @@ router.get('/master/ordenes', function(req, res){
 
 router.get('/master/reportes', function(req, res){
   res.render('master/reportes', 
-    {products: [{stock: 213, sales: 123, sold_units: 231}, {stock: 450, sales: 347, sold_units: 670}]});
+    {stores: [{stock: 213, sales: 123, sold_units: 231}, {stock: 450, sales: 347, sold_units: 670}]});
+});
+
+router.get('/master/contabilidad', function(req, res){
+  res.render('master/contabilidad', 
+    {stores: [
+      {name: 'ABC', income: 4500000, expenses: 3500000, on_transit: [300000, 450000, 200000]},
+      {name: 'DEF', income: 3420000, expenses: 1234000, on_transit: [23000]}
+    ]});
 });
 
 

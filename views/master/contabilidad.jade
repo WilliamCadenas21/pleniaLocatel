@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= 'Master'
+  body
+    h1 Contabilidad
+    each store in stores
+        h2 Franquicia #{store.name}
+        h3 Ingresos:
+        p $#{store.income}
+        h3 Egresos:
+        p $#{store.expenses}
+        h3 Trámites en tránsito:
+        each transaction in store.on_transit
+            p $#{transaction}
+
+
+    a(href='/master/home') Inicio
