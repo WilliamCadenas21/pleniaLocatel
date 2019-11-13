@@ -1,0 +1,25 @@
+[
+    {
+        "nombre":"f1",
+        "inventario": [
+            {
+                "nombre":"algo",
+                "cantidad": 2
+            },
+            {
+                "nombre":"algo2",
+                "cantidad": 3
+            }]
+    },
+    {"nombre":"f2",
+        "inventario": [
+            {
+                "nombre":"algo3",
+                "cantidad": 10
+            },
+            {
+                "nombre":"algo4",
+                "cantidad": 11
+            }]
+    }
+]
