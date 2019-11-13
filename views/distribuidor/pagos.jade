@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= 'Distribuidor'
+  body
+    h1 Pagos
+    h2 Pagos Pendientes
+    each payment in payments
+        unless payment.paid
+            h4 Orden #{payment.id}
+            p Franquicia: #{payment.from}
+            p Monto: $#{payment.amount}
+
+    h2 Pagos Realizados
+        each payment in payments
+            if payment.paid
+                h4 Orden #{payment.id}
+                p Franquicia: #{payment.from}
+                p Monto: $#{payment.amount}
+
+
+    a(href='/distribuidor/home') Inicio

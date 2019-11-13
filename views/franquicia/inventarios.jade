@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Solicitar acceso a inventario
+    form(method='POST' action='/franquicia/inventarios')
+        div.form-group
+            label(for='store') Seleccionar:
+            select(name='store')
+                option(value='own') Propio
+                each store in stores
+                    option(value='#{store}') #{store}
+    
+        button.btn.btn-primary(type='submit') Solicitar
+
+    a(href='/franquicia/home') Inicio

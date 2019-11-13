@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Inventario #{store}
+    each product in products
+        p #{product.name} Cantidad: #{product.quantity} 
+
+    a(href='/franquicia/home') Inicio

@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Pagos
+    h2 Pagos por Órdenes
+    h4 Pendientes
+    each payment in in_payments
+        if payment.type == 'order'
+            unless payment.paid
+                p Pago ##{payment.id} de #{payment.from}: $#{payment.amount}
+                button Notificar
+    h4 Recibidos
+    each payment in in_payments
+        if payment.type == 'order'
+            if payment.paid
+                p Pago ##{payment.id} de #{payment.from}: $#{payment.amount}
+
+    h2 Pagos por Contabilidad
+    h4 Pendientes
+    each payment in in_payments
+        if payment.type == 'acc'
+            unless payment.paid
+                p Pago ##{payment.id} de #{payment.from}: $#{payment.amount}
+                button Notificar
+
+    h4 Recibidos
+    each payment in in_payments
+        if payment.type == 'acc'
+            if payment.paid
+                p Pago ##{payment.id} de #{payment.from}: $#{payment.amount}
+
+    h4 A Pagar
+    each payment in out_payments
+        unless payment.paid
+            p Pago ##{payment.id}: $#{payment.amount}
+            button Pagar
+
+    h4 Realizados
+    each payment in out_payments
+        if payment.paid
+            p Pago ##{payment.id}: $#{payment.amount}
+
+    a(href='/master/home') Inicio
