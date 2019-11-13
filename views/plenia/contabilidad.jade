@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= 'Plenia Locatel'
+  body
+    h1 Contabilidad
+    each master in masters
+        h2 #{master.name}
+        h3 Ingresos:
+        p $#{master.income}
+        h3 Egresos:
+        p $#{master.expenses}
+        h3 Trámites en tránsito:
+        each transaction in master.on_transit
+            p $#{transaction}
+
+
+    a(href='/plenia/home') Inicio

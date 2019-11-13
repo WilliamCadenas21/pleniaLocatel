@@ -3,7 +3,7 @@ html
   head
     title= title
   body
-    h1 Home
+    h1 Home - #{title}
     each l in links
         li
             a(href=base_url+l[1]) #{l[0]}
