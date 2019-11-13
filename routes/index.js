@@ -23,8 +23,20 @@ router.post('/login', function(req, res){
   res.end();
 });
 
+
+// RUTAS FRANQUICIA
+
 router.get('/franquicia/home', function(req, res){
-  res.render('franquicia/home');
+  res.render('home', 
+  { title: 'Franquicias', 
+    links: [['Inventarios', 'inventarios'], 
+            ['Pagos', 'pagos'], 
+            ['Auditoría', 'auditoria'], 
+            ['Órdenes', 'ordenes'],
+            ['Reportes', 'reportes'],
+            ['Contabilidad', 'contabilidad']],
+    base_url: '/franquicia/'
+  });
 });
 
 router.get('/franquicia/auditoria', function(req, res){
@@ -54,6 +66,10 @@ router.post('/franquicia/ordenes', function(req, res){
   res.end();
 });
 
+router.get('/franquicia/reportes', function(req, res){
+  res.render('franquicia/reportes', {stock: 450, sales: 347});
+});
+
 router.get('/franquicia/inventarios', function(req, res){
   res.render('franquicia/inventarios', {stores: ['ABC', 'DEF']});
 });
@@ -65,5 +81,35 @@ router.post('/franquicia/inventarios', function(req, res){
     {name: 'Equipo 2', quantity: 12},
   ]});
 });
+
+
+// RUTAS DISTRIBUIDOR
+
+router.get('/distribuidor/home', function(req, res){
+  res.render('home', 
+  { title: 'Distribuidor', 
+    links: [['Pagos', 'pagos'], 
+            ['Órdenes', 'ordenes']],
+    base_url: '/distribuidor/'
+  });
+});
+
+router.get('/distribuidor/ordenes', function(req, res){
+  res.render('distribuidor/ordenes', 
+  {orders: [
+    {id: 23128, store: 'ABC', products: [{name: 'Equipo 1', quantity: 5}]},
+    {id: 21232, store: 'DEF', products: [{name: 'Equipo 3', quantity: 7}]},
+  ]});
+});
+
+router.get('/distribuidor/pagos', function(req, res){
+  res.render('distribuidor/pagos', 
+  {payments: [
+    {id: 123123, from: 'ABC', amount: 450000, paid: true},
+    {id: 128312, from: 'DEF', amount: 234000, paid: true},
+    {id: 219382, from: 'ABC', amount: 735000, paid: false},
+  ]});
+});
+
 
 module.exports = router;

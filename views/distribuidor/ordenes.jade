@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= 'Distribuidor'
+  body
+    h1 Órdenes
+    each order in orders
+        h2 Orden #{order.id}
+        h3 Franquicia:
+        p #{order.store}
+        h3 Productos:
+        each product in order.products
+            p #{product.name} Cantidad: #{product.quantity}
+        button Enviar
+        br
+        br
+
+    a(href='/distribuidor/home') Inicio
