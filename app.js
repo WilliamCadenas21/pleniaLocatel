@@ -13,7 +13,7 @@ dotenv.config();
 //Configura la db
 require('./database')
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var master = require('./routes/master')
 var distributor = require('./routes/distributor');
 var plenia = require('./routes/plenia');
@@ -33,11 +33,11 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/', master);
-app.use('/', franchise);
-app.use('/', distributor);
-app.use('/plenia', auth ,plenia);
+app.use('/', index);
+app.use('/master', auth, master);
+app.use('/franquicia', auth, franchise);
+app.use('/distribuidor', auth, distributor);
+app.use('/plenia', auth, plenia);
 app.use('/dbconfig',dbconfig)
 
 /// catch 404 and forwarding to error handler
