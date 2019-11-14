@@ -13,6 +13,7 @@ dotenv.config();
 require('./database')
 
 var routes = require('./routes/index');
+var master = require('./routes/master')
 var users = require('./routes/users');
 var franquiciado = require('./routes/franquiciado');
 var dbconfig = require('./routes/dbconfig');
@@ -31,6 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/', master);
 app.use('/users', users);
 app.use('/franquiciado', franquiciado);
 app.use('/dbconfig',dbconfig)

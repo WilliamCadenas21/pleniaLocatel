@@ -1,4 +1,4 @@
-const { Catalog } = require('../models/catalog.model.js')
+const { Catalog } = require('../models/catalog.model')
 const Distributor = require('../models/distributor.model')
 const Master = require('../models/master.model')
 const User = require('../models/user.model')
@@ -7,7 +7,6 @@ const catalog_file = require('../filesJson/catalog.json')
 const masters_file = require('../filesJson/masters.json')
 const distributors_file = require('../filesJson/distributors.json')
 const user_file = require('../filesJson/users.json')
-
 
 const dbController = {}
 
