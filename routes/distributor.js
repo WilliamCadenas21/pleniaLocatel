@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const orders = require('../controllers/orderController') 
 
 router.get('/distribuidor/home', async (req, res) => {
     try {
@@ -23,15 +24,20 @@ router.get('/distribuidor/ordenes', async (req, res) => {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
+            const user_id = req.app.locals.user.id;
+            let orders_list = await orders.getOrdersToId(user_id);
             res.render('distribuidor/ordenes', 
-            {orders: [
-                {id: 23128, store: 'ABC', products: [{name: 'Equipo 1', quantity: 5}]},
-                {id: 21232, store: 'DEF', products: [{name: 'Equipo 3', quantity: 7}]},
-            ]});
+            {orders: orders_list});
         }
     } catch (e) {
         console.log('Error:' + e)
     }
+});
+
+router.post('/distribuidor/ordenes', async function(req, res){
+    const order_id = req.body.order_id;
+    orders.deliverOrder(order_id);
+    res.redirect('/distribuidor/ordenes');
 });
 
 router.get('/distribuidor/pagos', async (req, res) => {
@@ -39,12 +45,10 @@ router.get('/distribuidor/pagos', async (req, res) => {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
+            const user_id = req.app.locals.user.id;
+            let order_payments = await orders.getOrdersToId(user_id);
             res.render('distribuidor/pagos', 
-            {payments: [
-                {id: 123123, from: 'ABC', amount: 450000, paid: true},
-                {id: 128312, from: 'DEF', amount: 234000, paid: true},
-                {id: 219382, from: 'ABC', amount: 735000, paid: false},
-            ]});
+            {payments: order_payments});
         }
     } catch (e) {
         console.log('Error:' + e)

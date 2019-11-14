@@ -2,6 +2,9 @@ const { Catalog } = require('../models/catalog.model')
 const Distributor = require('../models/distributor.model')
 const Master = require('../models/master.model')
 const Order = require('../models/order.model')
+const Franchise = require('../models/franchise.model')
+
+const obj = {}
 
 const obj = {}
 
@@ -72,4 +75,46 @@ obj.payOrder = async (id) => {
     await Order.updateOne({id: id}, {paid: true});
 }
 
+<<<<<<< HEAD
+=======
+async function deliverOrder(id) {
+    let order = await Order.findOne({id: id});
+    let franchise = await Franchise.findOne({id: order.from});
+
+    let franchise_products = {};
+    for (let i = 0; i < franchise.stock.length; i++) {
+        let cur_product = franchise.stock[i];
+        franchise_products[cur_product.id] = cur_product;
+    }
+
+    console.log(franchise.stock);
+    console.log(order.products)
+
+    for (let i = 0; i < order.products.length; i++) {
+        let order_product = order.products[i];
+        let franchise_product = franchise_products[order_product.id];
+        let new_product = Catalog({id: order_product.id, name: order_product.name});
+        if (franchise_product) {
+            new_product.quantity = order_product.quantity + new_product.quantity;
+        }
+        else {
+            new_product.quantity = order_product.quantity;
+        }
+        await new_product.save();
+        franchise_products[order_product.id] = new_product;
+    }
+ 
+    var final_products = [];
+    for (var key in franchise_products) {
+        final_products.push(franchise_products[key]);
+    }
+
+    console.log(final_products);
+    franchise.stock = final_products;
+    console.log(franchise);
+    await franchise.save();
+    //await Order.deleteOne({id: id});
+}
+
+>>>>>>> franquicias-gui
 module.exports = obj;
