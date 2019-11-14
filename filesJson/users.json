@@ -1,0 +1,32 @@
+[
+    {
+        "user" : "locatel53",
+        "pass" : "pass",
+        "id" : "F-01",
+        "type" : "franquicia"
+    },
+    {
+        "user" : "locatel34",
+        "pass" : "pass",
+        "id" : "F-02",
+        "type" : "franquicia"
+    },
+    {
+        "user" : "master01",
+        "pass" : "pass",
+        "id" : "M-01",
+        "type" : "master"
+    },
+    {
+        "user" : "galaxia",
+        "pass" : "pass",
+        "id" : "D-01",
+        "type" : "distribuidor"
+    },
+    {
+        "user" : "plenia",
+        "pass" : "pass",
+        "id" : "P-01",
+        "type" : "plenia"
+    }
+]

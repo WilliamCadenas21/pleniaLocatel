@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= 'Plenia Locatel'
+  body
+    h1 Contabilidad
+    each store in stores
+        h2 #{store.name}
+        h3 Ingresos:
+        p $#{store.income}
+        h3 Egresos:
+        p $#{store.expenses}
+        h3 Trámites en tránsito:
+        each transaction in store.on_transit
+            p $#{transaction}
+
+
+    a(href='/plenia/home') Inicio

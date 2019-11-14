@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= 'Plenia Locatel'
+  body
+    h1 Pagos Contabilidad
+    h2 Pagos Pendientes
+    each payment in payments
+        unless payment.paid
+            h4 Orden #{payment.id}
+            p Franquicia: #{payment.from}
+            p Monto: $#{payment.amount}
+            button Notificar
+
+    h2 Pagos Recibidos
+    each payment in payments
+        if payment.paid
+            h4 Orden #{payment.id}
+            p Franquicia: #{payment.from}
+            p Monto: $#{payment.amount}
+
+
+    a(href='/plenia/home') Inicio

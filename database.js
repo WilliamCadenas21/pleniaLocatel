@@ -5,7 +5,7 @@ const url = process.env.URLDB
 connectionLocal = () => {
     mongoose.connect('mongodb://localhost:27017/myapp', {
         useNewUrlParser: true,
-        useUnifiedTopology: true     
+        useUnifiedTopology: true
     })
     
     const connection = mongoose.connection

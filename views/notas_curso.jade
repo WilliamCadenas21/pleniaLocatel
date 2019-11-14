@@ -2,6 +2,6 @@
 
 
 mixin notas_empleado(i, notas)
-    h3 Empleado #{i}
+    h3 Empleado #{i+1}
     -  for (var mand = 0; mand < rules.length; mand++)
         li #{rules[mand]}: #{notas[mand]}

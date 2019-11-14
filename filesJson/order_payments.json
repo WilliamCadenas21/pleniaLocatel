@@ -1,0 +1,20 @@
+[
+    {
+        "paid" : false,
+        "amount": 350000,
+        "products": [
+            {
+                "name" : "Producto 1",
+                "id" : 1,
+                "quantity" : 19
+            },
+            {
+                "name" : "Producto 5",
+                "id" : 5,
+                "quantity" : 13
+            }
+        ],
+        "from" : "F-02",
+        "to" : "D-01"
+    }
+]
