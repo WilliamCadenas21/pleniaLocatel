@@ -1,4 +1,4 @@
-const { Catalog } = require('../models/catalog.model.js')
+const { Catalog } = require('../models/catalog.model')
 const Distributor = require('../models/distributor.model')
 const Master = require('../models/master.model')
 const User = require('../models/user.model')
