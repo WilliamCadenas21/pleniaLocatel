@@ -7,13 +7,13 @@ html
     h2 Pagos por Órdenes
     h3 Pendientes
     each payment in order_payments
-        unless payment.paid
+        if payment.sent && payment.received && !payment.paid
             p Pago ##{payment.id}: $#{payment.amount}
             form(method='POST' action='/franquicia/pagos')
               button(type='submit', name='order_payment', value='#{payment.id}') Pagar
     h3 Realizados
     each payment in order_payments
-        if payment.paid
+        if payment.sent && payment.received && payment.paid
             p Pago ##{payment.id}: $#{payment.amount}
 
     h2 Pagos por Contabilidad

@@ -45,7 +45,7 @@ obj.createOrder = async (on_dict, from) => {
             quantities[on_ids[i]] = quantity;
         }
     }
-    let products = await filterCatalogByIds(ids);
+    let products = await obj.filterCatalogByIds(ids);
     for (let i = 0; i < products.length; i++) {
         products[i].quantity = quantities[products[i].id];
     }
@@ -55,6 +55,8 @@ obj.createOrder = async (on_dict, from) => {
         to: on_dict.to,
         from: from,
         paid: false,
+        sent: false,
+        received: false,
         amount: (Math.floor(Math.random()*20)+1)*10000, // Monto aleatorio mientras no haya precios de productos
         id: (Math.floor(Math.random()*1000)) // Id aleatorio para que no salga el de mongo
     });
@@ -73,9 +75,11 @@ obj.payOrder = async (id) => {
     await Order.updateOne({id: id}, {paid: true});
 }
 
-async function deliverOrder(id) {
+obj.deliverOrder = async (id) => {
     let order = await Order.findOne({id: id});
-    let franchise = await Franchise.findOne({id: order.from});
+    order.sent = true;
+    await order.save();
+    /*let franchise = await Franchise.findOne({id: order.from});
 
     let franchise_products = {};
     for (let i = 0; i < franchise.stock.length; i++) {
@@ -109,7 +113,13 @@ async function deliverOrder(id) {
     franchise.stock = final_products;
     console.log(franchise);
     await franchise.save();
-    //await Order.deleteOne({id: id});
+    //await Order.deleteOne({id: id});*/
+}
+
+obj.receiveOrder = async (id) => {
+    let order = await Order.findOne({id: id});
+    order.received = true;
+    await order.save();
 }
 
 module.exports = obj;

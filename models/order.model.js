@@ -8,6 +8,8 @@ const OrderSchema = mongoose.Schema({
     amount: Number,
     id: Number,
     paid: Boolean,
+    sent: Boolean,
+    received: Boolean
 })
 
 module.exports = mongoose.model('Order', OrderSchema)
