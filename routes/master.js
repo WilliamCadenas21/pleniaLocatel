@@ -28,12 +28,12 @@ router.get('/master/auditoria', async function(req, res){
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         } else {
-            const object = await franchises.getFranchiseByIdMaster(req.app.locals.user.id)
-            console.log(object)
-            res.render('master/auditoria', {stores: [
-                {name: 'ABC', employees: [[0, 1, 2, 3, 8, 5, 2, 7, 8, 9], [4, 1, 2, 6, 4, 5, 8, 8, 8, 9]]},
-                {name: 'DEF', employees: [[2, 4, 2, 3, 3, 5, 2, 7, 5, 9]]},
-            ]})
+            const result = await franchises.getFranchiseByIdMaster(req.app.locals.user.id)
+            const array = []
+            result.forEach(element => {
+                array.push({name: element.name, employees: element.employees}) 
+            });
+            res.render('master/auditoria', {stores: array})
         }
     } catch (e) {
         console.log('Error:' + e)
