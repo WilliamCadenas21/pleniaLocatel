@@ -14,6 +14,7 @@ router.get('/login', function(req, res){
 });
 
 router.post('/login', async function(req, res){
+  var hola = req.body.user;
   var username = req.body.user;
   var userobj = await user.getUser(username);
   req.app.locals.user = userobj;
