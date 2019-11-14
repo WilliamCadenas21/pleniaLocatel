@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 var franchises = require('../controllers/franchiseController')
 
-router.get('/master/home', function(req, res){
+router.get('/master/home', (req, res) => {
     try {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
@@ -23,7 +23,8 @@ router.get('/master/home', function(req, res){
     }
 });
 
-router.get('/master/auditoria', async function(req, res){
+//completed - for revision
+router.get('/master/auditoria', async (req, res) => {
     try {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
@@ -40,7 +41,8 @@ router.get('/master/auditoria', async function(req, res){
     }
 });
 
-router.get('/master/pagos', function(req, res){
+// TODO
+router.get('/master/pagos', async (req, res) => {
     try {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
@@ -63,15 +65,18 @@ router.get('/master/pagos', function(req, res){
     }
 });
 
-router.get('/master/inventarios', function(req, res){
+//completed - for revision
+router.get('/master/inventarios', async (req, res) => {
     try{
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
-            res.render('master/inventarios', {stores: [
-                {name: 'ABC', products: [{name: 'Equipo 1', quantity: 5}, {name: 'Equipo 2', quantity: 9}]},
-                {name: 'DEF', products: [{name: 'Equipo 1', quantity: 7}, {name: 'Equipo 3', quantity: 3}]},
-            ]})
+            const result = await franchises.getFranchiseByIdMaster(req.app.locals.user.id)
+            const array = []
+            result.forEach(element => {
+                array.push({name: element.name, products: element.stock}) 
+            });
+            res.render('master/inventarios', {stores: array})
         }
     } catch (e) {
         console.log('Error:' + e)
@@ -100,7 +105,7 @@ router.get('/master/ordenes', async function(req, res){
     }
 });
 
-router.post('/master/ordenes', async function(req, res){
+router.post('/master/ordenes', async (req, res) => {
     try{
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
@@ -113,7 +118,7 @@ router.post('/master/ordenes', async function(req, res){
     }
 });
 
-router.get('/master/reportes', function(req, res){ 
+router.get('/master/reportes', async (req, res) => { 
     try{   
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
@@ -126,7 +131,7 @@ router.get('/master/reportes', function(req, res){
     }
 });
 
-router.get('/master/contabilidad', function(req, res){
+router.get('/master/contabilidad', async (req, res) => {
     try {
         if (req.app.locals.user == undefined) res.render('unauthorized')
         res.render('master/contabilidad', 
