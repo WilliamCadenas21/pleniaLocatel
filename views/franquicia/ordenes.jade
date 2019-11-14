@@ -4,6 +4,7 @@ html
     title= 'Franquicias'
   body
     h1 Órdenes
+    h2 Hacer una orden
     form(method='POST' action='/franquicia/ordenes')
         div.form-group
             label(for='to') Seleccionar:
@@ -20,5 +21,19 @@ html
                   input(type="number", name="quant_#{products[i].id}", min=1, max=1000) 
 
         button.btn.btn-primary(type='submit') Ordenar
+
+    h2 Órdenes a recibir
+    each order in orders
+      if order.sent && !order.received
+        h2 Orden #{order.id}
+        h3 Enviado por:
+        p #{order.to}
+        h3 Productos:
+        each product in order.products
+            p #{product.name} Cantidad: #{product.quantity}
+        form(method='POST' action='/franquicia/recibir_ordenes')
+              button(type='submit', name='order_id', value='#{order.id}') Recibir
+        br
+        br
 
     a(href='/franquicia/home') Inicio

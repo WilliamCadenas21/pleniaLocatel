@@ -92,12 +92,15 @@ router.get('/franquicia/ordenes', async function(req, res){
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
+            const user_id = req.app.locals.user.id;
             let products = await orders.getCatalog();
             let suppliers = await orders.getSuppliers();
+            let received_orders = await orders.getOrdersFromId(user_id);
             res.render('franquicia/ordenes', 
             {
                 products: products,
-                suppliers: suppliers
+                suppliers: suppliers,
+                orders: received_orders
             });
         }
     } catch (e) {
@@ -111,6 +114,20 @@ router.post('/franquicia/ordenes', async function(req, res) {
             res.render('unauthorized')
         }else{
             await orders.createOrder(req.body, req.app.locals.user.id);
+            res.redirect('/franquicia/ordenes');
+            res.end();
+        }
+    } catch (e) {
+        console.log('Error:' + e)
+    }
+});
+
+router.post('/franquicia/recibir_ordenes', async function(req, res) {
+    try {
+        if (req.app.locals.user == undefined) {
+            res.render('unauthorized')
+        }else{
+            await orders.receiveOrder(req.body.order_id);
             res.redirect('/franquicia/ordenes');
             res.end();
         }

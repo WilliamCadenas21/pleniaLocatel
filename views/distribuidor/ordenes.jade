@@ -5,6 +5,7 @@ html
   body
     h1 Órdenes
     each order in orders
+      unless order.sent
         h2 Orden #{order.id}
         h3 Franquicia:
         p #{order.from}

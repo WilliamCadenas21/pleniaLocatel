@@ -7,11 +7,11 @@ html
     each store in stores
         h2 #{store.name}
         h3 Ingresos:
-        p $#{store.income}
+        p $#{store.accounting.income}
         h3 Egresos:
-        p $#{store.expenses}
+        p $#{store.accounting.expenses}
         h3 Trámites en tránsito:
-        each transaction in store.on_transit
+        each transaction in store.accounting.on_transit
             p $#{transaction}
 
 

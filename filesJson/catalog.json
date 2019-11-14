@@ -25,6 +25,11 @@
         "id" : 5
     },
     {
+        "name" : "Producto 6",
+        "available" : false,
+        "id" : 6
+    },
+    {
         "name" : "Equipo Médico 1",
         "available" : true,
         "id" : 10
@@ -33,5 +38,15 @@
         "name" : "Equipo Médico 2",
         "available" : true,
         "id" : 11
+    },
+    {
+        "name" : "Equipo Médico 3",
+        "available" : true,
+        "id" : 12
+    },
+    {
+        "name" : "Equipo Médico 4",
+        "available" : true,
+        "id" : 13
     }
 ]
