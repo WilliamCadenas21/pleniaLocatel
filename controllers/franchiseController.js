@@ -1,15 +1,17 @@
 const Franchise = require('../models/franchise.model')
 
-async function getAll() {
-    return await Franchise.find();
+const obj = {}
+
+obj.getAll = async () => {
+    return await Franchise.find()
 }
 
-async function getFranchiseById(id) {
-    return await Franchise.findOne({id: id});
+obj.getFranchiseById = async (id) => {
+    return await Franchise.findOne({id: id})
 }
 
-async function getFranchiseByIdMaster(id_master) {
-    return await Franchise.find({id_master: id_master});
+obj.getFranchiseByIdMaster = async (id_master) => {
+    return await Franchise.find({id_master: id_master})
 }
 
-module.exports = {getAll, getFranchiseById, getFranchiseByIdMaster};
+module.exports = obj
