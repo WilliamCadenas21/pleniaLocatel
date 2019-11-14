@@ -1,3 +1,4 @@
+//Models
 const { Catalog } = require('../models/catalog.model')
 const Distributor = require('../models/distributor.model')
 const Master = require('../models/master.model')
@@ -5,6 +6,7 @@ const User = require('../models/user.model')
 const Franchise = require('../models/franchise.model')
 const Payment = require('../models/payment.model')
 
+//Files.Json
 const catalog_file = require('../filesJson/catalog.json')
 const masters_file = require('../filesJson/masters.json')
 const distributors_file = require('../filesJson/distributors.json')
