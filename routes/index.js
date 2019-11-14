@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var master = require('../controllers/masterController')
+var orders = require('../controllers/orderController')
+var user = require('../controllers/userController')
+const app = require('../app.js')
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -11,16 +13,12 @@ router.get('/login', function(req, res){
   res.render('login');
 });
 
-router.post('/login', function(req, res){
-  var role = req.body.role;
-  if (role == 'Franquiciado')
-    res.redirect('/franquicia/home');
-  else if (role == 'Distribuidor')
-    res.redirect('/distribuidor/home');
-  else if (role == 'Master Franquicia')
-    res.redirect('/master/home');
-  else if (role == 'Plenia Locatel')
-    res.redirect('/plenia/home');
+router.post('/login', async function(req, res){
+  var username = req.body.user;
+  var userobj = await user.getUser(username);
+  req.app.locals.user = userobj;
+  var role = userobj.type;
+  res.redirect('/' + role + '/home');
   res.end();
 });
 
@@ -58,12 +56,19 @@ router.get('/franquicia/contabilidad', function(req, res){
   res.render('franquicia/contabilidad', {income: 4500000, expenses: 3500000, on_transit: [300000, 450000, 200000]});
 });
 
-router.get('/franquicia/ordenes', function(req, res){
-  res.render('franquicia/ordenes', {products: [{name: 'Equipo 1'}, {name: 'Equipo 2'}]});
+router.get('/franquicia/ordenes', async function(req, res){
+  let products = await orders.getCatalog();
+  let suppliers = await orders.getSuppliers();
+  res.render('franquicia/ordenes', 
+  {
+    products: products,
+    suppliers: suppliers
+  });
 });
 
-router.post('/franquicia/ordenes', function(req, res){
-  console.log(req.body);
+router.post('/franquicia/ordenes', async function(req, res){
+  await orders.createOrder(req.body, req.app.locals.user.id);
+  res.redirect('/franquicia/ordenes');
   res.end();
 });
 
@@ -158,7 +163,7 @@ router.get('/master/inventarios', function(req, res){
 });
 
 router.get('/master/ordenes', async function(req, res){
-  let products = await master.getCatalog();
+  let products = await orders.getCatalog();
   res.render('master/ordenes', 
   { products: products,
     orders: [
@@ -168,7 +173,7 @@ router.get('/master/ordenes', async function(req, res){
 });
 
 router.post('/master/ordenes', async function(req, res){
-  await master.updateCatalog(req.body);
+  await orders.updateCatalog(req.body);
   res.redirect('/master/ordenes');
 });
 
