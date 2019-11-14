@@ -8,4 +8,8 @@ async function getFranchiseById(id) {
     return await Franchise.findOne({id: id});
 }
 
-module.exports = {getAll, getFranchiseById};
+async function getFranchiseByIdMaster(id_master) {
+    return await Franchise.find({id_master: id_master});
+}
+
+module.exports = {getAll, getFranchiseById, getFranchiseByIdMaster};

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var franchises = require('../controllers/franchiseController')
 
 router.get('/master/home', function(req, res){
     res.render('home', 
@@ -15,7 +16,7 @@ router.get('/master/home', function(req, res){
 });
 
 router.get('/master/auditoria', async function(req, res){
-    const object = await 
+    const object = await franchises.getFranchiseByIdMaster()
     res.render('master/auditoria', {stores: [
         {name: 'ABC', employees: [[0, 1, 2, 3, 8, 5, 2, 7, 8, 9], [4, 1, 2, 6, 4, 5, 8, 8, 8, 9]]},
         {name: 'DEF', employees: [[2, 4, 2, 3, 3, 5, 2, 7, 5, 9]]},
