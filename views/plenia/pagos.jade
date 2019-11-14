@@ -7,14 +7,14 @@ html
     h2 Pagos Pendientes
     each payment in payments
         unless payment.paid
-            h4 Orden #{payment.id}
+            h4 Pago #{payment.id}
             p Franquicia: #{payment.from}
             p Monto: $#{payment.amount}
 
     h2 Pagos Recibidos
     each payment in payments
         if payment.paid
-            h4 Orden #{payment.id}
+            h4 Pago #{payment.id}
             p Franquicia: #{payment.from}
             p Monto: $#{payment.amount}
 

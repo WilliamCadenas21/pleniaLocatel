@@ -12,9 +12,21 @@
         "type" : "franquicia"
     },
     {
+        "user" : "locatel00",
+        "pass" : "pass",
+        "id" : "F-03",
+        "type" : "franquicia"
+    },
+    {
         "user" : "master01",
         "pass" : "pass",
         "id" : "M-01",
+        "type" : "master"
+    },
+    {
+        "user" : "master02",
+        "pass" : "pass",
+        "id" : "M-02",
         "type" : "master"
     },
     {

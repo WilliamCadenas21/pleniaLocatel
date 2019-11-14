@@ -67,5 +67,40 @@
             [0, 1, 2, 3, 4, 8, 8, 6, 8, 8]
         ],
         "id_master" : "M-01"
+    },
+    {
+        "name" : "Locatel Maracaibo Plaza",
+        "id" : "F-03",
+        "stock" : [
+            {
+                "name" :  "Producto 3",
+                "id" : 1, 
+                "quantity" : 91
+            },
+            {
+                "name" :  "Producto 4",
+                "id" : 2, 
+                "quantity" : 37
+            },
+            {
+                "name" :  "Equipo Médico 2",
+                "id" : 10, 
+                "quantity" : 93
+            }
+        ],
+        "report" : {
+            "stock" : 900,
+            "sales" : 452,
+            "sold_units" : 671
+        },
+        "accounting" : {
+            "income" : 4123123,
+            "expenses" : 5334356,
+            "on_transit" : [23235, 32981]
+        },
+        "employees" : [
+            [3, 5, 2, 9, 2, 4, 5, 3, 7, 3]
+        ],
+        "id_master" : "M-02"
     }
 ]

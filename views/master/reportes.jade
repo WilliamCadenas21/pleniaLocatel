@@ -5,9 +5,10 @@ html
   body
     h1 Reportes
     each store in stores
-        p Inventario: #{store.stock}
-        p Ventas: #{store.sales}
-        p Unidades vendidas: #{store.sold_units}
-        br
+      h2 #{store.name}
+      p Inventario: #{store.report.stock}
+      p Ventas: #{store.report.sales}
+      p Unidades vendidas: #{store.report.sold_units}
+      br
 
     a(href='/master/home') Inicio

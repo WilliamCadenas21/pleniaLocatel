@@ -15,13 +15,15 @@ html
     
     h1 Órdenes
     each order in orders
+      unless order.sent
         h3 Orden #{order.id}
         h4 Franquicia:
-        p #{order.store}
+        p #{order.from}
         h4 Productos:
         each product in order.products
             p #{product.name} Cantidad: #{product.quantity}
-        button Enviar
+        form(method='POST' action='/master/enviar_orden')
+              button(type='submit', name='order_id', value='#{order.id}') Enviar
         br
         br
 

@@ -13,11 +13,4 @@ html
             label(for='password') Contraseña:
             input#password.form-control(type='password' name='password')
 
-        div.form-group
-            label(for='role') Rol:
-            select(name='role')
-                - roles = [ 'Franquiciado', 'Distribuidor', 'Master Franquicia', 'Plenia Locatel']
-                each item in roles
-                    option(value=item) #{item}
-
         button.btn.btn-primary(type='submit') Entrar
