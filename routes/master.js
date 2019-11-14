@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
-var franchises = require('../controllers/franchiseController')
+const franchises = require('../controllers/franchiseController')
+const orders = require('../controllers/orderController')
 
+// Completed
 router.get('/master/home', (req, res) => {
     try {
         if (req.app.locals.user == undefined) {
@@ -23,7 +25,7 @@ router.get('/master/home', (req, res) => {
     }
 });
 
-//completed - for revision
+//Completed - for revision
 router.get('/master/auditoria', async (req, res) => {
     try {
         if (req.app.locals.user == undefined) {
@@ -83,6 +85,7 @@ router.get('/master/inventarios', async (req, res) => {
     }
 });
 
+// listo a medias ?
 router.get('/master/ordenes', async function(req, res){
     try {
         if (req.app.locals.user == undefined) {
@@ -105,6 +108,7 @@ router.get('/master/ordenes', async function(req, res){
     }
 });
 
+//lita ?
 router.post('/master/ordenes', async (req, res) => {
     try{
         if (req.app.locals.user == undefined) {
@@ -118,6 +122,7 @@ router.post('/master/ordenes', async (req, res) => {
     }
 });
 
+// TODO
 router.get('/master/reportes', async (req, res) => { 
     try{   
         if (req.app.locals.user == undefined) {
@@ -131,6 +136,7 @@ router.get('/master/reportes', async (req, res) => {
     }
 });
 
+// TODO
 router.get('/master/contabilidad', async (req, res) => {
     try {
         if (req.app.locals.user == undefined) res.render('unauthorized')

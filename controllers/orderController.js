@@ -3,13 +3,15 @@ const Distributor = require('../models/distributor.model')
 const Master = require('../models/master.model')
 const Order = require('../models/order.model')
 
+const obj = {}
+
 // Retorna una lista de productos con el catálogo
-async function getCatalog() {
+obj.getCatalog = async () => {
     const res = await Catalog.find();
     return res;
 }
 
-async function updateCatalog(on_dict) {
+obj.updateCatalog = async (on_dict) => {
     const products = await Catalog.find();
     for (let i = 0; i < products.length; i++) {
         products[i].available = on_dict["on_"+products[i].id]=="on";
@@ -17,12 +19,12 @@ async function updateCatalog(on_dict) {
     }
 }
 
-async function filterCatalogByIds(ids) {
+obj.filterCatalogByIds = async (ids) => {
     return await Catalog.find({id: {$in: ids}});
 }
 
 
-async function getSuppliers() {
+obj.getSuppliers = async () => {
     const distributors = await Distributor.find();
     const masters = await Master.find();
     distributors.push(...masters);
@@ -30,7 +32,7 @@ async function getSuppliers() {
 }
 
 
-async function createOrder(on_dict, from) {
+obj.createOrder = async (on_dict, from) => {
     let on_ids = Object.keys(on_dict).filter(key => key.startsWith('on_'))
         .map(str => parseInt(str.substring(str.indexOf('_')+1, str.length)));
     let quantities = {};
@@ -58,16 +60,16 @@ async function createOrder(on_dict, from) {
     await order.save();
 }
 
-async function getOrdersFromId(id) {
+obj.getOrdersFormId = async (id) => {
     return await Order.find({from: id});
 }
 
-async function getOrdersToId(id) {
+obj.getOrdersToId = async (id) => {
     return await Order.find({to: id});
 }
 
-async function payOrder(id) {
+obj.payOrder = async (id) => {
     await Order.updateOne({id: id}, {paid: true});
 }
 
-module.exports = {getCatalog, updateCatalog, getSuppliers, createOrder, getOrdersFromId, getOrdersToId, payOrder};
+module.exports = obj;
