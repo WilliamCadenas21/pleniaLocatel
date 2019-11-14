@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const payments = require('../controllers/paymentController')
+const franchises = require('../controllers/franchiseController')
 
 router.get('/plenia/home', async (req, res) =>{
     try {
@@ -25,13 +27,9 @@ router.get('/plenia/pagos', async (req, res) => {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
-            res.render('plenia/pagos', {payments: [
-                {amount: 4500000, paid: false, id: 1231238, from: 'ABC'}, 
-                {amount: 7500000, paid: true, id: 1231221, from: 'ABC'},
-                {amount: 2320000, paid: false, id: 1231235, from: 'DEF'},
-                {amount: 23000000, paid: true, id: 2453235, from: 'DEF'},
-                {amount: 32350000, paid: false, id: 2531235, from: 'DEF'}
-            ]});
+            let user_id = req.app.locals.user.id;
+            let acc_payments = await payments.getPaymentsToId(user_id);
+            res.render('plenia/pagos', {payments: acc_payments});
         }
     } catch (e) {
         console.log('Error:' + e)
@@ -43,10 +41,9 @@ router.get('/plenia/reportes', async (req, res) => {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
+            let stores = await franchises.getAll();
             res.render('plenia/reportes', 
-                {stores: [
-                {name: 'ABC', stock: 213, sales: 123, sold_units: 231},
-                {name: 'DEF', stock: 450, sales: 347, sold_units: 670}]}
+                {stores: stores}
             );
         }
     } catch (e) {
@@ -59,11 +56,8 @@ router.get('/plenia/auditoria', async (req, res) => {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
-            res.render('plenia/auditoria', {stores: [
-                {name: 'ABC', employees: [[0, 1, 2, 3, 8, 5, 2, 7, 8, 9], [4, 1, 2, 6, 4, 5, 8, 8, 8, 9]]},
-                {name: 'DEF', employees: [[2, 4, 2, 3, 3, 5, 2, 7, 5, 9]]},
-                {name: 'Master 1', employees: [[5, 7, 3, 5, 7, 4, 8, 3, 6, 9], [2, 4, 2, 3, 3, 5, 2, 7, 5, 9]]},
-            ]})
+            let stores = await franchises.getAll();
+            res.render('plenia/auditoria', {stores: stores})
         }
     } catch (e) {
         console.log('Error:' + e)
@@ -75,10 +69,8 @@ router.get('/plenia/contabilidad', async (req, res) => {
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
-            res.render('plenia/contabilidad',     {stores: [
-                {name: 'ABC', income: 4500000, expenses: 3500000, on_transit: [300000, 450000, 200000]},
-                {name: 'DEF', income: 3420000, expenses: 1234000, on_transit: [23000]}
-            ]});
+            let stores = await franchises.getAll();
+            res.render('plenia/contabilidad', {stores: stores});
         }
     } catch (e) {
         console.log('Error:' + e)

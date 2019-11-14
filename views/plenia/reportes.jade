@@ -5,10 +5,10 @@ html
   body
     h1 Reportes
     each store in stores
-        h4 #{store.name}
-        p Inventario: #{store.stock}
-        p Ventas: #{store.sales}
-        p Unidades vendidas: #{store.sold_units}
+        h3 #{store.name}
+        p Inventario: #{store.report.stock}
+        p Ventas: #{store.report.sales}
+        p Unidades vendidas: #{store.report.sold_units}
         br
 
     a(href='/plenia/home') Inicio
