@@ -6,8 +6,6 @@ const Franchise = require('../models/franchise.model')
 
 const obj = {}
 
-const obj = {}
-
 // Retorna una lista de productos con el catálogo
 obj.getCatalog = async () => {
     const res = await Catalog.find();
@@ -75,8 +73,6 @@ obj.payOrder = async (id) => {
     await Order.updateOne({id: id}, {paid: true});
 }
 
-<<<<<<< HEAD
-=======
 async function deliverOrder(id) {
     let order = await Order.findOne({id: id});
     let franchise = await Franchise.findOne({id: order.from});
@@ -103,7 +99,7 @@ async function deliverOrder(id) {
         await new_product.save();
         franchise_products[order_product.id] = new_product;
     }
- 
+
     var final_products = [];
     for (var key in franchise_products) {
         final_products.push(franchise_products[key]);
@@ -116,5 +112,4 @@ async function deliverOrder(id) {
     //await Order.deleteOne({id: id});
 }
 
->>>>>>> franquicias-gui
 module.exports = obj;

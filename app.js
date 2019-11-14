@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const { auth } = require('./middleware')
 
 //dotenv config
 const dotenv = require('dotenv');
@@ -36,7 +37,7 @@ app.use('/', routes);
 app.use('/', master);
 app.use('/', franchise);
 app.use('/', distributor);
-app.use('/', plenia);
+app.use('/plenia', auth ,plenia);
 app.use('/dbconfig',dbconfig)
 
 /// catch 404 and forwarding to error handler
@@ -69,6 +70,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
