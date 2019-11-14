@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var orders = require('../controllers/orderController')
 var user = require('../controllers/userController')
+var franchises = require('../controllers/franchiseController')
+var payments = require('../controllers/paymentController')
 const app = require('../app.js')
 
 /* GET home page. */
@@ -38,22 +40,33 @@ router.get('/franquicia/home', function(req, res){
   });
 });
 
-router.get('/franquicia/auditoria', function(req, res){
-  res.render('franquicia/auditoria', {employees:[[0, 1, 2, 3, 8, 5, 2, 7, 8, 9], [4, 1, 2, 6, 4, 5, 8, 8, 8, 9]]});
+router.get('/franquicia/auditoria', async function(req, res){
+  const user_id = req.app.locals.user.id;
+  const userobj = await franchises.getFranchiseById(user_id);
+  res.render('franquicia/auditoria', {employees:userobj.employees});
 });
 
-router.get('/franquicia/pagos', function(req, res){
-  res.render('franquicia/pagos', {payments: [
-    {amount: 4500000, paid: false, id: 1231238, type: 'order'}, 
-    {amount: 7500000, paid: true, id: 1231221, type: 'order'},
-    {amount: 2320000, paid: false, id: 1231235, type: 'order'},
-    {amount: 23000000, paid: true, id: 2453235, type: 'acc'},
-    {amount: 32350000, paid: false, id: 2531235, type: 'acc'}
-  ]});
+router.get('/franquicia/pagos', async function(req, res){
+  const user_id = req.app.locals.user.id;
+  let order_payments = await orders.getOrdersFromId(user_id);
+  let acc_payments = await payments.getPaymentsFromId(user_id)
+  res.render('franquicia/pagos', {order_payments: order_payments, acc_payments: acc_payments});
 });
 
-router.get('/franquicia/contabilidad', function(req, res){
-  res.render('franquicia/contabilidad', {income: 4500000, expenses: 3500000, on_transit: [300000, 450000, 200000]});
+router.post('/franquicia/pagos', async function(req, res){
+  if (req.body.order_payment) {
+    await orders.payOrder(req.body.order_payment);
+  }
+  else if (req.body.acc_payment) {
+    await payments.pay(req.body.acc_payment);
+  }
+  res.redirect('/franquicia/pagos');
+});
+
+router.get('/franquicia/contabilidad', async function(req, res){
+  const user_id = req.app.locals.user.id;
+  const userobj = await franchises.getFranchiseById(user_id);
+  res.render('franquicia/contabilidad', userobj.accounting);
 });
 
 router.get('/franquicia/ordenes', async function(req, res){
@@ -66,26 +79,26 @@ router.get('/franquicia/ordenes', async function(req, res){
   });
 });
 
-router.post('/franquicia/ordenes', async function(req, res){
+router.post('/franquicia/ordenes', async function(req, res) {
   await orders.createOrder(req.body, req.app.locals.user.id);
   res.redirect('/franquicia/ordenes');
   res.end();
 });
 
-router.get('/franquicia/reportes', function(req, res){
-  res.render('franquicia/reportes', {stock: 450, sales: 347, sold_units: 670});
+router.get('/franquicia/reportes', async function(req, res){
+  const user_id = req.app.locals.user.id;
+  const userobj = await franchises.getFranchiseById(user_id);
+  res.render('franquicia/reportes', userobj.report);
 });
 
-router.get('/franquicia/inventarios', function(req, res){
-  res.render('franquicia/inventarios', {stores: ['ABC', 'DEF']});
+router.get('/franquicia/inventarios', async function(req, res){
+  const stores = await franchises.getAll();
+  res.render('franquicia/inventarios', {stores: stores});
 });
 
-router.post('/franquicia/inventarios', function(req, res){
-  var store = req.body.store == 'own' ? 'Propio' : req.body.store;
-  res.render('franquicia/inventarios_ver', {store: store, products: [
-    {name: 'Equipo 1', quantity: 35},
-    {name: 'Equipo 2', quantity: 12},
-  ]});
+router.post('/franquicia/inventarios', async function(req, res){
+  var store = await franchises.getFranchiseById(req.body.store);
+  res.render('franquicia/inventarios_ver', {store: store});
 });
 
 

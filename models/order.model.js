@@ -6,7 +6,7 @@ const OrderSchema = mongoose.Schema({
     to: String,
     products: [CatalogSchema],
     amount: Number,
-    id: String,
+    id: Number,
     paid: Boolean,
 })
 

@@ -8,9 +8,8 @@ html
         div.form-group
             label(for='store') Seleccionar:
             select(name='store')
-                option(value='own') Propio
                 each store in stores
-                    option(value='#{store}') #{store}
+                  option(value='#{store.id}') #{store.name}
     
         button.btn.btn-primary(type='submit') Solicitar
 

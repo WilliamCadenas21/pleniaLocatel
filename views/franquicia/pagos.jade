@@ -6,28 +6,26 @@ html
     h1 Pagos
     h2 Pagos por Órdenes
     h3 Pendientes
-    each payment in payments
-        if payment.type == 'order'
-            unless payment.paid
-                p Pago ##{payment.id}: $#{payment.amount}
-                button Pagar
+    each payment in order_payments
+        unless payment.paid
+            p Pago ##{payment.id}: $#{payment.amount}
+            form(method='POST' action='/franquicia/pagos')
+              button(type='submit', name='order_payment', value='#{payment.id}') Pagar
     h3 Realizados
-    each payment in payments
-        if payment.type == 'order'
-            if payment.paid
-                p Pago ##{payment.id}: $#{payment.amount}
+    each payment in order_payments
+        if payment.paid
+            p Pago ##{payment.id}: $#{payment.amount}
 
     h2 Pagos por Contabilidad
     h3 Pendientes
-    each payment in payments
-        if payment.type == 'acc'
+    each payment in acc_payments
             unless payment.paid
                 p Pago ##{payment.id}: $#{payment.amount}
-                button Pagar
+                form(method='POST' action='/franquicia/pagos')
+                  button(type='submit', name='acc_payment', value='#{payment.id}') Pagar
 
     h3 Realizados
-    each payment in payments
-        if payment.type == 'acc'
+    each payment in acc_payments
             if payment.paid
                 p Pago ##{payment.id}: $#{payment.amount}
 

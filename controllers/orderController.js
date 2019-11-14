@@ -51,9 +51,23 @@ async function createOrder(on_dict, from) {
         products: products,
         to: on_dict.to,
         from: from,
-        paid: false
+        paid: false,
+        amount: (Math.floor(Math.random()*20)+1)*10000, // Monto aleatorio mientras no haya precios de productos
+        id: (Math.floor(Math.random()*1000)) // Id aleatorio para que no salga el de mongo
     });
     await order.save();
 }
 
-module.exports = {getCatalog, updateCatalog, getSuppliers, createOrder};
+async function getOrdersFromId(id) {
+    return await Order.find({from: id});
+}
+
+async function getOrdersToId(id) {
+    return await Order.find({to: id});
+}
+
+async function payOrder(id) {
+    await Order.updateOne({id: id}, {paid: true});
+}
+
+module.exports = {getCatalog, updateCatalog, getSuppliers, createOrder, getOrdersFromId, getOrdersToId, payOrder};
