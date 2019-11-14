@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const franchises = require('../controllers/franchiseController')
 const orders = require('../controllers/orderController')
-
+const payments = require('../controllers/paymentController')
 
 router.get('/franquicia/home', (req, res) =>{
     try {

@@ -60,7 +60,7 @@ obj.createOrder = async (on_dict, from) => {
     await order.save();
 }
 
-obj.getOrdersFormId = async (id) => {
+obj.getOrdersFromId = async (id) => {
     return await Order.find({from: id});
 }
 
