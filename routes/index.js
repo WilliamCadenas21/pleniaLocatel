@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var orders = require('../controllers/orderController')
+
 var user = require('../controllers/userController')
-var franchises = require('../controllers/franchiseController')
-var payments = require('../controllers/paymentController')
 
 
 /* GET home page. */
@@ -23,84 +21,6 @@ router.post('/login', async function(req, res){
   res.redirect('/' + role + '/home');
   res.end();
 });
-
-
-// RUTAS FRANQUICIA
-
-router.get('/franquicia/home', function(req, res){
-  res.render('home', 
-  { title: 'Franquicias', 
-    links: [['Inventarios', 'inventarios'], 
-            ['Pagos', 'pagos'], 
-            ['Auditoría', 'auditoria'], 
-            ['Órdenes', 'ordenes'],
-            ['Reportes', 'reportes'],
-            ['Contabilidad', 'contabilidad']],
-    base_url: '/franquicia/'
-  });
-});
-
-router.get('/franquicia/auditoria', async function(req, res){
-  const user_id = req.app.locals.user.id;
-  const userobj = await franchises.getFranchiseById(user_id);
-  res.render('franquicia/auditoria', {employees:userobj.employees});
-});
-
-router.get('/franquicia/pagos', async function(req, res){
-  const user_id = req.app.locals.user.id;
-  let order_payments = await orders.getOrdersFromId(user_id);
-  let acc_payments = await payments.getPaymentsFromId(user_id)
-  res.render('franquicia/pagos', {order_payments: order_payments, acc_payments: acc_payments});
-});
-
-router.post('/franquicia/pagos', async function(req, res){
-  if (req.body.order_payment) {
-    await orders.payOrder(req.body.order_payment);
-  }
-  else if (req.body.acc_payment) {
-    await payments.pay(req.body.acc_payment);
-  }
-  res.redirect('/franquicia/pagos');
-});
-
-router.get('/franquicia/contabilidad', async function(req, res){
-  const user_id = req.app.locals.user.id;
-  const userobj = await franchises.getFranchiseById(user_id);
-  res.render('franquicia/contabilidad', userobj.accounting);
-});
-
-router.get('/franquicia/ordenes', async function(req, res){
-  let products = await orders.getCatalog();
-  let suppliers = await orders.getSuppliers();
-  res.render('franquicia/ordenes', 
-  {
-    products: products,
-    suppliers: suppliers
-  });
-});
-
-router.post('/franquicia/ordenes', async function(req, res) {
-  await orders.createOrder(req.body, req.app.locals.user.id);
-  res.redirect('/franquicia/ordenes');
-  res.end();
-});
-
-router.get('/franquicia/reportes', async function(req, res){
-  const user_id = req.app.locals.user.id;
-  const userobj = await franchises.getFranchiseById(user_id);
-  res.render('franquicia/reportes', userobj.report);
-});
-
-router.get('/franquicia/inventarios', async function(req, res){
-  const stores = await franchises.getAll();
-  res.render('franquicia/inventarios', {stores: stores});
-});
-
-router.post('/franquicia/inventarios', async function(req, res){
-  var store = await franchises.getFranchiseById(req.body.store);
-  res.render('franquicia/inventarios_ver', {store: store});
-});
-
 
 // RUTAS DISTRIBUIDOR
 

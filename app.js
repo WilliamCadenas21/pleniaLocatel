@@ -15,7 +15,7 @@ require('./database')
 var routes = require('./routes/index');
 var master = require('./routes/master')
 var users = require('./routes/users');
-var franquiciado = require('./routes/franquiciado');
+var franchise = require('./routes/franchise');
 var dbconfig = require('./routes/dbconfig');
 
 var app = express();
@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/', master);
+app.use('/', franchise);
 app.use('/users', users);
-app.use('/franquiciado', franquiciado);
 app.use('/dbconfig',dbconfig)
 
 /// catch 404 and forwarding to error handler

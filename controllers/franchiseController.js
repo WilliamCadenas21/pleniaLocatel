@@ -1,5 +1,6 @@
 const Franchise = require('../models/franchise.model')
 
+
 const obj = {}
 
 obj.getAll = async () => {
