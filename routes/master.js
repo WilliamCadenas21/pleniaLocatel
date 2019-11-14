@@ -3,6 +3,7 @@ const router = express.Router();
 var franchises = require('../controllers/franchiseController')
 
 router.get('/master/home', function(req, res){
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     res.render('home', 
     { title: 'Master Franquicia', 
         links: [['Inventarios', 'inventarios'], 
@@ -16,14 +17,21 @@ router.get('/master/home', function(req, res){
 });
 
 router.get('/master/auditoria', async function(req, res){
-    const object = await franchises.getFranchiseByIdMaster()
-    res.render('master/auditoria', {stores: [
-        {name: 'ABC', employees: [[0, 1, 2, 3, 8, 5, 2, 7, 8, 9], [4, 1, 2, 6, 4, 5, 8, 8, 8, 9]]},
-        {name: 'DEF', employees: [[2, 4, 2, 3, 3, 5, 2, 7, 5, 9]]},
-    ]})
+    try {
+        if (req.app.locals.user == undefined) res.render('unauthorized')
+        const object = await franchises.getFranchiseByIdMaster(req.app.locals.user.id)
+        console.log(object)
+        res.render('master/auditoria', {stores: [
+            {name: 'ABC', employees: [[0, 1, 2, 3, 8, 5, 2, 7, 8, 9], [4, 1, 2, 6, 4, 5, 8, 8, 8, 9]]},
+            {name: 'DEF', employees: [[2, 4, 2, 3, 3, 5, 2, 7, 5, 9]]},
+        ]})
+    } catch (e) {
+        console.log('Error:' + e)
+    }
 });
 
 router.get('/master/pagos', function(req, res){
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     res.render('master/pagos', 
     {in_payments: [
         {id: 123123, from: 'ABC', amount: 450000, paid: true, type: 'acc'},
@@ -39,6 +47,7 @@ router.get('/master/pagos', function(req, res){
 });
 
 router.get('/master/inventarios', function(req, res){
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     res.render('master/inventarios', {stores: [
         {name: 'ABC', products: [{name: 'Equipo 1', quantity: 5}, {name: 'Equipo 2', quantity: 9}]},
         {name: 'DEF', products: [{name: 'Equipo 1', quantity: 7}, {name: 'Equipo 3', quantity: 3}]},
@@ -46,6 +55,7 @@ router.get('/master/inventarios', function(req, res){
 });
 
 router.get('/master/ordenes', async function(req, res){
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     let products = await orders.getCatalog();
     res.render('master/ordenes', 
         { 
@@ -60,16 +70,19 @@ router.get('/master/ordenes', async function(req, res){
 });
 
 router.post('/master/ordenes', async function(req, res){
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     await orders.updateCatalog(req.body);
     res.redirect('/master/ordenes');
 });
 
-router.get('/master/reportes', function(req, res){
+router.get('/master/reportes', function(req, res){    
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     res.render('master/reportes', 
     {stores: [{stock: 213, sales: 123, sold_units: 231}, {stock: 450, sales: 347, sold_units: 670}]});
 });
 
 router.get('/master/contabilidad', function(req, res){
+    if (req.app.locals.user == undefined) res.render('unauthorized')
     res.render('master/contabilidad', 
         {
             stores: [
