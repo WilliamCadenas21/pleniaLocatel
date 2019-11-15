@@ -79,47 +79,35 @@ obj.deliverOrder = async (id) => {
     let order = await Order.findOne({id: id});
     order.sent = true;
     await order.save();
-    /*let franchise = await Franchise.findOne({id: order.from});
-
-    let franchise_products = {};
-    for (let i = 0; i < franchise.stock.length; i++) {
-        let cur_product = franchise.stock[i];
-        franchise_products[cur_product.id] = cur_product;
-    }
-
-    console.log(franchise.stock);
-    console.log(order.products)
-
-    for (let i = 0; i < order.products.length; i++) {
-        let order_product = order.products[i];
-        let franchise_product = franchise_products[order_product.id];
-        let new_product = Catalog({id: order_product.id, name: order_product.name});
-        if (franchise_product) {
-            new_product.quantity = order_product.quantity + new_product.quantity;
-        }
-        else {
-            new_product.quantity = order_product.quantity;
-        }
-        await new_product.save();
-        franchise_products[order_product.id] = new_product;
-    }
-
-    var final_products = [];
-    for (var key in franchise_products) {
-        final_products.push(franchise_products[key]);
-    }
-
-    console.log(final_products);
-    franchise.stock = final_products;
-    console.log(franchise);
-    await franchise.save();
-    //await Order.deleteOne({id: id});*/
 }
 
 obj.receiveOrder = async (id) => {
     let order = await Order.findOne({id: id});
     order.received = true;
-    await order.save();
+    await order.save();    
+    
+    let franchise = await Franchise.findOne({id: order.from});
+
+    let res = {};
+    for (let i = 0; i < order.products.length; i++) {
+        const id = order.products[i].id;
+        res[id] = {quantity: order.products[i].quantity, name: order.products[i].name, id: order.products[i].id};
+    }
+    for (let i = 0; i < franchise.stock.length; i++) {
+        const id = franchise.stock[i].id;
+        if (res[id]) {
+            res[id].quantity += franchise.stock[i].quantity;
+        }
+        else {
+            res[id] = {quantity: franchise.stock[i].quantity, name: franchise.stock[i].name, id: franchise.stock[i].id};
+        }
+    }
+
+    let new_stock = [];
+    for (let key in res) new_stock.push(res[key]);
+
+    franchise.stock = new_stock;
+    await franchise.save();
 }
 
 module.exports = obj;
