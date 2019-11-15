@@ -36,6 +36,12 @@
         "type" : "distribuidor"
     },
     {
+        "user" : "distribuidor",
+        "pass" : "pass",
+        "id" : "D-02",
+        "type" : "distribuidor"
+    },
+    {
         "user" : "plenia",
         "pass" : "pass",
         "id" : "P-01",

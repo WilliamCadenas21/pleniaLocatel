@@ -25,10 +25,10 @@ obj.filterCatalogByIds = async (ids) => {
 }
 
 
-obj.getSuppliers = async () => {
+obj.getSuppliers = async (franchise_id) => {
     const distributors = await Distributor.find();
-    const masters = await Master.find();
-    distributors.push(...masters);
+    const franchise = await Franchise.findOne({id: franchise_id});
+    distributors.push({name: 'Master Propio', id: franchise.id_master});
     return distributors;
 }
 

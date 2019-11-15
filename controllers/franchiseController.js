@@ -15,4 +15,9 @@ obj.getFranchiseByIdMaster = async (id_master) => {
     return await Franchise.find({id_master: id_master})
 }
 
+obj.getFranchiseWithSameMaster = async (id_franchise) => {
+    const franchise = await Franchise.findOne({id: id_franchise});
+    return obj.getFranchiseByIdMaster(franchise.id_master);
+}
+
 module.exports = obj

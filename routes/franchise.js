@@ -94,7 +94,7 @@ router.get('/franquicia/ordenes', async function(req, res){
         }else{
             const user_id = req.app.locals.user.id;
             let products = await orders.getCatalog();
-            let suppliers = await orders.getSuppliers();
+            let suppliers = await orders.getSuppliers(user_id);
             let received_orders = await orders.getOrdersFromId(user_id);
             res.render('franquicia/ordenes', 
             {
@@ -155,7 +155,8 @@ router.get('/franquicia/inventarios', async function(req, res){
         if (req.app.locals.user == undefined) {
             res.render('unauthorized')
         }else{
-            const stores = await franchises.getAll();
+            const franchise_id = req.app.locals.user.id;
+            const stores = await franchises.getFranchiseWithSameMaster(franchise_id);
             res.render('franquicia/inventarios', {stores: stores});
         }
     } catch (e) {

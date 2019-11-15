@@ -13,4 +13,7 @@ html
             label(for='password') Contraseña:
             input#password.form-control(type='password' name='password')
 
+        if error
+          label(style='color:red;') Usuario inválido
+          br
         button.btn.btn-primary(type='submit') Entrar
