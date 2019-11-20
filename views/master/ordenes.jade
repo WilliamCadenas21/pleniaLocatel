@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title= 'Master'
+  body
+    h1 Catálogos
+    form(method='POST' action='/master/ordenes')
+        - for (var i = 0; i < products.length; i++)
+            div.form-group
+                input(type="checkbox", name="on_#{products[i].id}", checked=(products[i].available)) 
+                | #{products[i].name}
+        br
+        button Enviar
+            
+    
+    h1 Órdenes
+    each order in orders
+      unless order.sent
+        h3 Orden #{order.id}
+        h4 Franquicia:
+        p #{order.from}
+        h4 Productos:
+        each product in order.products
+            p #{product.name} Cantidad: #{product.quantity}
+        form(method='POST' action='/master/enviar_orden')
+              button(type='submit', name='order_id', value='#{order.id}') Enviar
+        br
+        br
+
+    a(href='/master/home') Inicio

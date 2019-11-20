@@ -1,0 +1,106 @@
+[
+    {
+        "name" : "Locatel Carrera 13",
+        "id" : "F-01",
+        "stock" : [
+            {
+                "name" :  "Producto 1",
+                "id" : 1, 
+                "quantity" : 30
+            },
+            {
+                "name" :  "Producto 3",
+                "id" : 3, 
+                "quantity" : 37
+            }
+        ],
+        "report" : {
+            "stock" : 67,
+            "sales" : 122,
+            "sold_units" : 189
+        },
+        "accounting" : {
+            "income" : 3127818,
+            "expenses" : 2318329,
+            "on_transit" : [12321, 312882, 28728]
+        },
+        "employees" : [
+            [3, 4, 5, 6, 7, 4, 3, 5, 3, 8],
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            [5, 6, 3, 6, 3, 8, 3, 6, 2, 5]
+        ],
+        "id_master" : "M-01"
+    },
+    {
+        "name" : "Locatel Avenida 34",
+        "id" : "F-02",
+        "stock" : [
+            {
+                "name" :  "Producto 1",
+                "id" : 1, 
+                "quantity" : 60
+            },
+            {
+                "name" :  "Producto 2",
+                "id" : 2, 
+                "quantity" : 51
+            },
+            {
+                "name" :  "Equipo Médico 1",
+                "id" : 10, 
+                "quantity" : 53
+            }
+        ],
+        "report" : {
+            "stock" : 164,
+            "sales" : 230,
+            "sold_units" : 321
+        },
+        "accounting" : {
+            "income" : 3132148,
+            "expenses" : 5312319,
+            "on_transit" : [21391, 3281, 32918, 32981]
+        },
+        "employees" : [
+            [3, 7, 2, 9, 2, 4, 5, 3, 7, 3],
+            [2, 8, 1, 9, 8, 5, 5, 3, 7, 3],
+            [0, 1, 2, 3, 4, 8, 8, 6, 8, 8]
+        ],
+        "id_master" : "M-01"
+    },
+    {
+        "name" : "Locatel Maracaibo Plaza",
+        "id" : "F-03",
+        "stock" : [
+            {
+                "name" :  "Producto 3",
+                "id" : 1, 
+                "quantity" : 91
+            },
+            {
+                "name" :  "Producto 4",
+                "id" : 2, 
+                "quantity" : 37
+            },
+            {
+                "name" :  "Equipo Médico 2",
+                "id" : 10, 
+                "quantity" : 93
+            }
+        ],
+        "report" : {
+            "stock" : 900,
+            "sales" : 452,
+            "sold_units" : 671
+        },
+        "accounting" : {
+            "income" : 4123123,
+            "expenses" : 5334356,
+            "on_transit" : [23235, 32981]
+        },
+        "employees" : [
+            [3, 5, 2, 9, 2, 4, 5, 3, 7, 3]
+        ],
+        "id_master" : "M-02"
+    }
+]

@@ -1,0 +1,11 @@
+include ../notas_curso
+
+doctype html
+html
+  head
+    title= 'Franquicias'
+  body
+    h1 Auditoría
+    - for (var i = 0; i < employees.length; i++) 
+      +notas_empleado(i, employees[i])
+    a(href='/franquicia/home') Inicio

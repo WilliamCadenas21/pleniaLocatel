@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title= 'Plenia'
+  body
+    h1 Reportes
+    each store in stores
+        h3 #{store.name}
+        p Inventario: #{store.report.stock}
+        p Ventas: #{store.report.sales}
+        p Unidades vendidas: #{store.report.sold_units}
+        br
+
+    a(href='/plenia/home') Inicio

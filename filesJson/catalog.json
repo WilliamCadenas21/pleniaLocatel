@@ -1,0 +1,52 @@
+[
+    {
+        "name" : "Producto 1",
+        "available" : true,
+        "id" : 1
+    },
+    {
+        "name" : "Producto 2",
+        "available" : true,
+        "id" : 2
+    },
+    {
+        "name" : "Producto 3",
+        "available" : true,
+        "id" : 3
+    },
+    {
+        "name" : "Producto 4",
+        "available" : false,
+        "id" : 4
+    },
+    {
+        "name" : "Producto 5",
+        "available" : false,
+        "id" : 5
+    },
+    {
+        "name" : "Producto 6",
+        "available" : false,
+        "id" : 6
+    },
+    {
+        "name" : "Equipo Médico 1",
+        "available" : true,
+        "id" : 10
+    },
+    {
+        "name" : "Equipo Médico 2",
+        "available" : true,
+        "id" : 11
+    },
+    {
+        "name" : "Equipo Médico 3",
+        "available" : true,
+        "id" : 12
+    },
+    {
+        "name" : "Equipo Médico 4",
+        "available" : true,
+        "id" : 13
+    }
+]

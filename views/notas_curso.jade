@@ -1,0 +1,7 @@
+- rules = ['Primero el cliente', 'Nunca diga no', 'Los proveedores también son nuestros clientes', 'Nuestros empleados comparten nuestros valores', 'Sin fallas de inventario', 'Tienda organizada', 'Venta cruzada de productos y servicios', 'Línea exclusiva de productos', 'Seguimiento de órdenes especiales', 'El mejor servicio en cada área']
+
+
+mixin notas_empleado(i, notas)
+    h3 Empleado #{i+1}
+    -  for (var mand = 0; mand < rules.length; mand++)
+        li #{rules[mand]}: #{notas[mand]}

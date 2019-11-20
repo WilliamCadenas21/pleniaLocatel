@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const { auth } = require('./middleware')
 
 //dotenv config
 const dotenv = require('dotenv');
@@ -12,9 +13,12 @@ dotenv.config();
 //Configura la db
 require('./database')
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var franquiciado = require('./routes/franquiciado');
+var index = require('./routes/index');
+var master = require('./routes/master')
+var distributor = require('./routes/distributor');
+var plenia = require('./routes/plenia');
+var franchise = require('./routes/franchise');
+var dbconfig = require('./routes/dbconfig');
 
 var app = express();
 
@@ -29,9 +33,12 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/franquiciado', franquiciado);
+app.use('/', index);
+app.use('/master', auth, master);
+app.use('/franquicia', auth, franchise);
+app.use('/distribuidor', auth, distributor);
+app.use('/plenia', auth, plenia);
+app.use('/dbconfig',dbconfig)
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -63,6 +70,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

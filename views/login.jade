@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= 'Iniciar sesión'
+  body
+    h1 Login
+    form(method='POST' action='/login')
+        div.form-group
+            label(for='user') Nombre:
+            input#user.form-control(type='text', name='user')
+
+        div.form-group
+            label(for='password') Contraseña:
+            input#password.form-control(type='password' name='password')
+
+        if error
+          label(style='color:red;') Usuario inválido
+          br
+        button.btn.btn-primary(type='submit') Entrar

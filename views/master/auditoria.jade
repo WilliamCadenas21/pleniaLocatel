@@ -1,0 +1,13 @@
+include ../notas_curso
+
+doctype html
+html
+  head
+    title= 'Master'
+  body
+    h1 Auditoría
+    each store in stores
+        h2 #{store.name}
+        - for (var i = 0; i < store.employees.length; i++) 
+            +notas_empleado(i, store.employees[i])
+    a(href='/master/home') Inicio

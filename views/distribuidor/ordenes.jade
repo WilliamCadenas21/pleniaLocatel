@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= 'Distribuidor'
+  body
+    h1 Órdenes
+    each order in orders
+      unless order.sent
+        h2 Orden #{order.id}
+        h3 Franquicia:
+        p #{order.from}
+        h3 Productos:
+        each product in order.products
+            p #{product.name} Cantidad: #{product.quantity}
+        form(method='POST' action='/distribuidor/ordenes')
+              button(type='submit', name='order_id', value='#{order.id}') Enviar
+        br
+        br
+
+    a(href='/distribuidor/home') Inicio

@@ -1,0 +1,51 @@
+[
+    {
+        "amount" : 430000,
+        "from" : "F-01",
+        "to" : "M-01",
+        "paid": false,
+        "id" : 1
+    },
+    {
+        "amount" : 323000,
+        "from" : "F-02",
+        "to" : "M-01",
+        "paid": false,
+        "id" : 2
+    },
+    {
+        "amount" : 729000,
+        "from" : "F-01",
+        "to" : "M-01",
+        "paid": true,
+        "id" : 3
+    },
+    {
+        "amount" : 90000,
+        "from" : "F-02",
+        "to" : "M-01",
+        "paid": false,
+        "id" : 4
+    },
+    {
+        "amount" : 1923000,
+        "from" : "M-01",
+        "to" : "P-01",
+        "paid": false,
+        "id" : 5
+    },
+    {
+        "amount" : 112000,
+        "from" : "M-01",
+        "to" : "P-01",
+        "paid": true,
+        "id" : 6
+    },
+    {
+        "amount" : 4223000,
+        "from" : "M-02",
+        "to" : "P-01",
+        "paid": false,
+        "id" : 7
+    }
+]

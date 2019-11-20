@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title= 'Master'
+  body
+    h1 Inventarios
+    each store in stores
+        h2 Inventario #{store.name}
+        each product in store.stock
+            p #{product.name} Cantidad: #{product.quantity} 
+
+    a(href='/master/home') Inicio
